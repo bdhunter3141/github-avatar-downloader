@@ -23,29 +23,24 @@ function getRepoContributors(repoOwner, repoName, cb) {
   });
 }
 
-
 function downloadImageByURL(url, filePath) {
   request.get(url)
     .on("error", function(err) {
       console.log("Error: ", err);
       return;
     })
-    .on("response", function(resp) {
-      console.log(`Response code is ${resp.statusCode} and response message is:`, resp.statusMessage);
-      console.log("Beginning download..");
-    })
-    .pipe(fs.createWriteStream(filePath))
-    .on("finish", function() {
-      console.log("Download complete.");
-    });
+    .pipe(fs.createWriteStream(filePath));
 }
 
 getRepoContributors("jquery", "jquery", function(err, result) {
-  console.log("Errors:", err);
-  console.log("Result: ");
-  result.forEach(function(avatar) {
-     downloadImageByURL(avatar.avatar_url, "./" + avatar.login + ".jpg");
-  });
+  if(result) {
+    fs.mkdir("./avatars/");
+    result.forEach(function(avatar) {
+     downloadImageByURL(avatar.avatar_url, "./avatars/" + avatar.login + ".jpg");
+    });
+  } else {
+    console.log("Errors:", err);
+  }
 });
 
 
