@@ -1,5 +1,7 @@
 var request = require("request");
 var fs = require("fs");
+var repoOwner = process.argv[2];
+var repoName = process.argv[3];
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
@@ -32,7 +34,7 @@ function downloadImageByURL(url, filePath) {
     .pipe(fs.createWriteStream(filePath));
 }
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(repoOwner, repoName, function(err, result) {
   if(result) {
     fs.mkdir("./avatars/");
     result.forEach(function(avatar) {
