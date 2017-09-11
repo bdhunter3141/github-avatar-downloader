@@ -24,14 +24,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
 }
 
 
-// getRepoContributors("jquery", "jquery", function(err, result) {
-//   console.log("Errors:", err);
-//   console.log("Result: ");
-//   result.forEach(function(avatar) {
-//     console.log("\t", avatar.avatar_url);
-//   });
-// });
-
 function downloadImageByURL(url, filePath) {
   request.get(url)
     .on("error", function(err) {
@@ -48,8 +40,14 @@ function downloadImageByURL(url, filePath) {
     });
 }
 
+getRepoContributors("jquery", "jquery", function(err, result) {
+  console.log("Errors:", err);
+  console.log("Result: ");
+  result.forEach(function(avatar) {
+     downloadImageByURL(avatar.avatar_url, "./" + avatar.login + ".jpg");
+  });
+});
 
-downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "./newimage.jpg");
 
 
 
