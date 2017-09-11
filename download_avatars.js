@@ -1,5 +1,7 @@
+// Requirements
 var request = require("request");
 var fs = require("fs");
+require('dotenv').config();
 
 // User input for Repo owner and Repo Name
 var repoOwner = process.argv[2];
@@ -9,8 +11,8 @@ var repoName = process.argv[3];
 console.log('Welcome to the GitHub Avatar Downloader!');
 
 // Authentication information
-var GITHUB_USER = "bdhunter3141";
-var GITHUB_TOKEN = "46755ed8b7655f1ac0e8e5e15608055e19f15fa4";
+var GITHUB_USER = process.env.GITHUB_USER;
+var GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 // Function creates the request URL and uses it in the options variable.
 // Function then uses the options variable to make a get request, returning a callback
