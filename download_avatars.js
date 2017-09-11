@@ -2,8 +2,12 @@ var request = require("request");
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
+var GITHUB_USER = "bdhunter3141";
+var GITHUB_TOKEN = "46755ed8b7655f1ac0e8e5e15608055e19f15fa4";
+
 function getRepoContributors(repoOwner, repoName, cb) {
-  // ...
+  var requestURL = 'https://'+ GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
+  console.log(requestURL);
 }
 
 
