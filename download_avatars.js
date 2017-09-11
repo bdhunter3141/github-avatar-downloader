@@ -35,6 +35,10 @@ function downloadImageByURL(url, filePath) {
 }
 
 getRepoContributors(repoOwner, repoName, function(err, result) {
+  if (!repoOwner || ! repoName) {
+    console.log("Please enter a valid GitHub Repo owner, followed by a valid GitHub Repo name.");
+    return;
+  }
   if(result) {
     fs.mkdir("./avatars/");
     result.forEach(function(avatar) {
