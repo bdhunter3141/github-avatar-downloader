@@ -14,24 +14,19 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }
   }
   request(options, function(err, response, body) {
-    if (err) throw err;
-    console.log('Response Status Code:', response.statusCode);
-    console.log(body);
+    if (err) {
+      cb(err);
+      return;
+    }
+    return cb("None.", JSON.parse(body));
   });
-  // request.get(requestURL)
-  //   .on("error", function(err) {
-  //     throw err;
-  //   })
-  //   .on("response", function(resp) {
-  //     console.log("Code: " + resp.statusCode);
-  //     console.log("Message: " + resp.statusMessage);
-  //     console.log("Content Type: " + resp.headers["content-type"]);
-  //     console.log("Body: " + resp.body);
-  //   })
 }
 
 
 getRepoContributors("jquery", "jquery", function(err, result) {
   console.log("Errors:", err);
-  console.log("Result:", result);
+  console.log("Result: ");
+  result.forEach(function(avatar) {
+    console.log("\t", avatar.avatar_url);
+  });
 });
